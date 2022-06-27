@@ -1,4 +1,4 @@
-package TallerProgramacionAvanzada.logica;
+package logica;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import TallerProgramacionAvanzada.utils.LoginWindow;
-import TallerProgramacionAvanzada.utils.SellWindow;
+import utils.LoginWindow;
+import utils.SellWindow;
 
 public class App {
 	
