@@ -21,13 +21,17 @@ public class SistemaImpl implements Sistema {
     }
 
 	@Override
-	public boolean login(String user, String pasword) {
+	public String login(String user, String pasword) {
 		for(User u : users) {
 			if(u.getUsername().equals(user) && u.getPassword().equals(pasword)) {
-				return true;
+				return "0";
+			}
+			//no encontrado
+			if(u.getUsername().equals(null)) {
+				return "1";
 			}
 		}
-		return false;
+		return "2";
 	}
 
 	@Override

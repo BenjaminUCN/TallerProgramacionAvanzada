@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -81,12 +82,24 @@ public class LoginWindow {
 	        public void actionPerformed(ActionEvent e) {
 	        	String user = userText.getText();
 	        	String pasword = passwordTextField.getText();
-	        	if(sistema.login(user, pasword)) {
+	        	
+	        	switch(sistema.login(user, pasword)) {
+	        	
+	        	//Caso en el que si se inicia sesion correctamente
+	        	case "0":
 	        		frame.dispose();
 		        	@SuppressWarnings("unused")
 					PerfilWindow perfilWindow = new PerfilWindow(sistema, sistema.getUserByName(user));
+		        	
+		        //Caso en el que no se encuentra al usuario
+	        	case "1":
+	        		JOptionPane.showMessageDialog(loginButton, "Usuario no encontrado");
+	        	
+	        	//Contra o usuario incorrectos
+	        	case "2":
+	        		JOptionPane.showMessageDialog(loginButton, "Usuario o contraseña incorrecta!");
 	        	}
-
+	        	
 	        }
 	    });
 		
