@@ -134,20 +134,23 @@ public class PerfilWindow {
 			public void actionPerformed(ActionEvent e) {
 				category.getSelectedItem();
 				System.out.println(category.getSelectedItem());
-				/*data = sistema.getProductData((String) category.getSelectedItem());
+				Object[][] data = sistema.getProductData((String) category.getSelectedItem());
 				
-				table = new JTable(data, columnNames);
-				table.getTableHeader().setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-				table.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-				table.getColumnModel().getColumn(0).setPreferredWidth(10);
-				table.getColumnModel().getColumn(1).setPreferredWidth(100);
-				table.getColumnModel().getColumn(2).setPreferredWidth(100);
-				table.getColumnModel().getColumn(3).setPreferredWidth(100);
-				table.getColumnModel().getColumn(4).setPreferredWidth(30);
-				table.setShowHorizontalLines(false);
-				table.setShowVerticalLines(false);
-				table.setPreferredScrollableViewportSize(new Dimension(200,30));
-				table.setFillsViewportHeight(true);*/
+				//Borrar la tabla
+				for(int i=0; i<table.getRowCount();i++) {
+					for(int j=0;j<5;j++) {
+						table.setValueAt("", i, j);
+					}
+				}
+				
+				//Escribir los datos
+				System.out.println(data.length);
+				for(int i=0; i<data.length;i++) {
+					for(int j=0;j<5;j++) {
+						table.setValueAt(data[i][j], i, j);
+					}	
+				}
+				
 			}
 		});
 		
