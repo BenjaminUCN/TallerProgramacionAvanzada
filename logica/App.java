@@ -1,0 +1,27 @@
+package TallerProgramacionAvanzada.logica;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import TallerProgramacionAvanzada.utils.LoginWindow;
+import TallerProgramacionAvanzada.utils.SellWindow;
+
+public class App {
+	
+	public static Sistema sistema;
+	
+    public static void main(String[] args) {
+    	Sistema sistema = new SistemaImpl();
+
+		LoginWindow login = new LoginWindow(sistema);
+    	//SellWindow sellWindow = new SellWindow(sistema);
+	}
+
+}
