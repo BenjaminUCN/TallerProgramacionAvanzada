@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+import dominio.Product;
 import dominio.User;
 import logica.Sistema;
 
@@ -22,8 +23,9 @@ import java.awt.Font;
 public class PerfilWindow {
 	
 	Sistema sistema;
-	
 	User user;
+	Object[][] data;
+	
 	JFrame frame;
 	
 	public PerfilWindow(Sistema sistema, User user) {
@@ -67,17 +69,8 @@ public class PerfilWindow {
 		category.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		
 		// Tabla
-		String[] columnNames = new String[] {"ID", "Nombre", "Categoria", "Fecha", "Visto"};
-		/*Object[][] data = new Object[][] {
-								{"1","Ñuñuki sport ñ3","Autos","04/04/2222","No"},
-								{"2","Amogus 3D Mod 1.7","Juegos","01/03/2222","No"},
-								{"3","ps4","Juegos","14/10/2018","Si"},
-								{"4","pc gamer","Juegos","12/12/2018","No"},
-								{"5","silla","Hogar","05/12/2018","No"},
-								{"6","labadora","Electrodomestico","08/11/2018","Si"},
-								};
-		*/						
-		Object[][] data = sistema.getProductData((String) category.getSelectedItem());						
+		String[] columnNames = new String[] {"ID", "Nombre", "Categoria", "Fecha", "Visto"};						
+		data = sistema.getProductData((String) category.getSelectedItem());						
 								
 		JTable table = new JTable(data, columnNames);
 		table.getTableHeader().setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -120,6 +113,7 @@ public class PerfilWindow {
 		myShopsBtn.setBounds(236, 327, 136, 25);
 		
 		//Añadir acciones a los Botones+filtro
+		//Vender
 		sellBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -129,12 +123,25 @@ public class PerfilWindow {
 			}
 		});
 		
+		//Información del producto
+		infoBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				
+				Product selectedProduct = sistema.getProductById(Integer.parseInt((String)data[table.getSelectedRow()][0]));
+				
+				@SuppressWarnings("unused")
+				ProductInfoWindow productInfoWindow = new ProductInfoWindow(sistema, selectedProduct);
+			}
+		});
+		
 		category.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				category.getSelectedItem();
 				System.out.println(category.getSelectedItem());
-				Object[][] data = sistema.getProductData((String) category.getSelectedItem());
+				data = sistema.getProductData((String) category.getSelectedItem());
 				
 				//Borrar la tabla
 				for(int i=0; i<table.getRowCount();i++) {

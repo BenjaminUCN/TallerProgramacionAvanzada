@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import dominio.User;
 import logica.Sistema;
+import javax.swing.JTextPane;
 
 //public class SellWindow extends Window{
 public class SellWindow{
@@ -33,7 +34,7 @@ public class SellWindow{
 		//super("publicar producto", 420, 420);
 		this.sistema = sistema;
 		this.sellerUser = sellerUser;
-		imagePath = "no-uimage.png";
+		imagePath = "no_image.png";
 		
 		frame = new JFrame("Ventas Coquimbo - ");
 		frame.setSize(557, 345);
@@ -45,7 +46,6 @@ public class SellWindow{
 		frame.getContentPane().add(panel);
 		placeComponents(panel);
 
-		
 		frame.setVisible(true);
 		
 		
@@ -90,11 +90,16 @@ public class SellWindow{
 												
 		// entrada de texto: Descripción producto
 		JTextField descriptionTextField = new JTextField(20);
+		/*descriptionTextField.setText("aaaa");
 		descriptionTextField.setBounds(10,135,320,124);
 		descriptionTextField.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-		panel.add(descriptionTextField);
+		panel.add(descriptionTextField);*/
 		
-		
+		JTextPane descriptionTxtpn = new JTextPane();
+		descriptionTxtpn.setBounds(10,135,320,124);
+		descriptionTxtpn.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		panel.add(descriptionTxtpn);
+
 		// texto: Descripción producto
 		JLabel categoryLabel = new JLabel("Categoría");
 		categoryLabel.setBounds(180, 10, 160, 25);
@@ -128,8 +133,8 @@ public class SellWindow{
 				String name = productNameTextField.getText();
 				String categoryStr = (String) category.getSelectedItem();
 				int price = Integer.parseInt(productPriceTextField.getText());
-				String description = descriptionTextField.getText();
-				
+				//String description = descriptionTextField.getText();
+				String description = descriptionTxtpn.getText();
 				
 				sistema.addProductToShop(name, categoryStr, price, description, imagePath, sellerUser);
 				
@@ -147,7 +152,7 @@ public class SellWindow{
 		photoLabel.setOpaque(true);
 		//photoLabel.setBackground(Color.cyan);
 		photoLabel.setBounds(340, 10, 190, 190);
-		photoLabel.setIcon(scaleImage(imagePath, photoLabel.getWidth(), photoLabel.getHeight()));
+		photoLabel.setIcon(sistema.scaleImage(imagePath, photoLabel.getWidth(), photoLabel.getHeight()));
 		photoLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		panel.add(photoLabel);
 		
@@ -166,7 +171,7 @@ public class SellWindow{
 				
 				if(response == JFileChooser.APPROVE_OPTION) {
 					imagePath = fileChooser.getSelectedFile().getAbsolutePath();
-					photoLabel.setIcon(scaleImage(imagePath, photoLabel.getWidth(), photoLabel.getHeight()));
+					photoLabel.setIcon(sistema.scaleImage(imagePath, photoLabel.getWidth(), photoLabel.getHeight()));
 				}
 			}
 		});
@@ -174,32 +179,5 @@ public class SellWindow{
 		panel.add(uploadPhotoBtn);
 		
 		
-	}
-	
-	/**
-	 * escala la imagen, solo funciona con labels cuadrados por ahora
-	 * @param path directorio de la imagen 
-	 * @param width ancho del label
-	 * @param height alto del label
-	 * @return imagen (ImageIcon) escalada para el label
-	 */
-	private ImageIcon scaleImage(String path, int width, int height) {
-		ImageIcon image = new ImageIcon(path);
-		/*Intento de algorithmo para labels no cuadradas
-		double originalRatio = image.getIconWidth()/image.getIconHeight();
-		double newRatio = width/height;
-		
-		if(originalRatio > 1 && newRatio >1) {
-			
-		}*/
-		
-		int size = width;//width = 190
-		
-		double scaleFactor = ((double) size)/Math.max(image.getIconWidth(), image.getIconHeight());
-		int scaledWidth = (int) Math.round(scaleFactor*image.getIconWidth());
-		int scaledHeight = (int) Math.round(scaleFactor*image.getIconHeight());
-		ImageIcon scaledImage = new ImageIcon(image.getImage().getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH));
-		
-		return scaledImage;
 	}
 }

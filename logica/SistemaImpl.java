@@ -1,6 +1,9 @@
 package logica;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.ImageIcon;
 
 import dominio.Product;
 import dominio.User;
@@ -52,6 +55,16 @@ public class SistemaImpl implements Sistema {
 	}
 	
 	@Override
+	public Product getProductById(int id) {
+		for(Product p : products) {
+			if(p.getId() == id) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	@Override
 	public void addProductToShop(String name, String category, int price, String description, String imagePath,
 			User sellerUser) {
 		
@@ -81,6 +94,34 @@ public class SistemaImpl implements Sistema {
 		}
 		
 		return data;
+	}
+	
+	/**
+	 * escala la imagen, solo funciona con labels cuadrados por ahora
+	 * @param path directorio de la imagen 
+	 * @param width ancho del label
+	 * @param height alto del label
+	 * @return imagen (ImageIcon) escalada para el label
+	 */
+	@Override
+	public ImageIcon scaleImage(String path, int width, int height) {
+		ImageIcon image = new ImageIcon(path);
+		/*Intento de algorithmo para labels no cuadradas
+		double originalRatio = image.getIconWidth()/image.getIconHeight();
+		double newRatio = width/height;
+		
+		if(originalRatio > 1 && newRatio >1) {
+			
+		}*/
+		
+		int size = width;//width = 190
+		
+		double scaleFactor = ((double) size)/Math.max(image.getIconWidth(), image.getIconHeight());
+		int scaledWidth = (int) Math.round(scaleFactor*image.getIconWidth());
+		int scaledHeight = (int) Math.round(scaleFactor*image.getIconHeight());
+		ImageIcon scaledImage = new ImageIcon(image.getImage().getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH));
+		
+		return scaledImage;
 	}
 
 }

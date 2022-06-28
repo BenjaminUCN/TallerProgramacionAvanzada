@@ -24,13 +24,18 @@ public class Product {
 		this.price = price;
 		this.description = description;
 		this.imagePath = imagePath;
+		this.seen = "No";
 		this.sellerUser = sellerUser;
 		
 		Date currentDate = new Date();
     	String strDate = currentDate.getDate()+"/"+(currentDate.getMonth()+1)+"/"+(currentDate.getYear()+1900);
     	this.date = strDate;
 	}
-
+	
+	public int getId() {
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -77,6 +82,10 @@ public class Product {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+	
+	public User getSellerUser() {
+		return sellerUser;
 	}
 	
 	public String[] getData() {
