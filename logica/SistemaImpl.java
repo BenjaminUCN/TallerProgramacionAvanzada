@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 
 import dominio.Product;
 import dominio.User;
+import utils.Window;
 
 
 public class SistemaImpl implements Sistema {

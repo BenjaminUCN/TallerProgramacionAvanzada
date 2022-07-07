@@ -24,15 +24,18 @@ import javax.swing.JTextPane;
 public class SellWindow{
 	
 	Sistema sistema;
+	WindowManager windowManager;
 	
 	User sellerUser;
 	String imagePath;
 	
 	JFrame frame;
 	
-	public SellWindow(Sistema sistema, User sellerUser) {
+	public SellWindow(Sistema sistema, WindowManager windowManager, User sellerUser) {
 		//super("publicar producto", 420, 420);
 		this.sistema = sistema;
+		this.windowManager = windowManager;
+		
 		this.sellerUser = sellerUser;
 		imagePath = "no_image.png";
 		
@@ -78,6 +81,7 @@ public class SellWindow{
 										
 		// entrada de texto: Precio producto
 		JTextField productPriceTextField = new JTextField(20);
+		productPriceTextField.setText("0");
 		productPriceTextField.setBounds(10,85,160,25);
 		productPriceTextField.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		panel.add(productPriceTextField);
@@ -139,8 +143,10 @@ public class SellWindow{
 				sistema.addProductToShop(name, categoryStr, price, description, imagePath, sellerUser);
 				
 				frame.dispose();
-	        	@SuppressWarnings("unused")
-				PerfilWindow perfilWindow = new PerfilWindow(sistema, sellerUser);
+	        	/*@SuppressWarnings("unused")
+				PerfilWindow perfilWindow = new PerfilWindow(sistema, sellerUser);*/
+				
+				windowManager.changeWindow("back");
 			}
 		});
 		

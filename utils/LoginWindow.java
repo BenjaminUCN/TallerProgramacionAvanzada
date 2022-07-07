@@ -13,10 +13,13 @@ import logica.Sistema;
 public class LoginWindow {
 	
 	Sistema sistema;
+	WindowManager windowManager;
+	
 	JFrame frame;
 	
-	public LoginWindow(Sistema sistema) {
+	public LoginWindow(Sistema sistema,WindowManager windowManager) {
 		this.sistema = sistema;
+		this.windowManager = windowManager;
 		
 		frame = new JFrame("Ventas Coquimbo - Login");
 		frame.setSize(420, 420);
@@ -66,8 +69,10 @@ public class LoginWindow {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	        	frame.dispose();
-		       	@SuppressWarnings("unused")
-				SigninWindow signinWindow = new SigninWindow(sistema);	        	
+		       	/*@SuppressWarnings("unused")
+				SigninWindow signinWindow = new SigninWindow(sistema);*/
+	        	
+	        	windowManager.changeWindow("signin");
 	        }
 	    });
 		
@@ -83,8 +88,11 @@ public class LoginWindow {
 	        	String pasword = passwordTextField.getText();
 	        	if(sistema.login(user, pasword)) {
 	        		frame.dispose();
-		        	@SuppressWarnings("unused")
-					PerfilWindow perfilWindow = new PerfilWindow(sistema, sistema.getUserByName(user));
+		        	/*@SuppressWarnings("unused")
+					PerfilWindow perfilWindow = new PerfilWindow(sistema, sistema.getUserByName(user));*/
+	        		
+	        		windowManager.setUser(sistema.getUserByName(user));
+	        		windowManager.changeWindow("perfil");
 	        	}
 
 	        }

@@ -10,11 +10,13 @@ import logica.Sistema;
 public class SigninWindow extends Window {
 	
 	Sistema sistema;
+	WindowManager windowManager;
 	
-	public SigninWindow(Sistema sistema) {
+	public SigninWindow(Sistema sistema, WindowManager windowManager) {
 		super("Registro", 500, 420);
 		
 		this.sistema = sistema;
+		this.windowManager = windowManager;
 	}
 	
 	
@@ -50,8 +52,10 @@ public class SigninWindow extends Window {
 			    	   
 			    	   if(sistema.sigin(username, name, email, contact, password))
 			    	   frame.dispose();
-					   @SuppressWarnings("unused")
-					   LoginWindow loginWindow = new LoginWindow(sistema);	
+					   /*@SuppressWarnings("unused")
+					   LoginWindow loginWindow = new LoginWindow(sistema);*/
+			    	   
+			    	   windowManager.changeWindow("login");
 		    	   }
 		    	           	
 		       }

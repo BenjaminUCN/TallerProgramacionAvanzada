@@ -88,6 +88,14 @@ public class Product {
 		return sellerUser;
 	}
 	
+	public void setSeen(boolean seen) {
+		if(seen) {
+			this.seen = "Sí";
+		}else {
+			this.seen = "No";
+		}
+	}
+	
 	public String[] getData() {
 		String[] data = {String.valueOf(id), name, category, date, seen};
 		return data;

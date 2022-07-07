@@ -23,13 +23,16 @@ import java.awt.Font;
 public class PerfilWindow {
 	
 	Sistema sistema;
+	WindowManager windowManager;
+	
 	User user;
 	Object[][] data;
 	
 	JFrame frame;
 	
-	public PerfilWindow(Sistema sistema, User user) {
+	public PerfilWindow(Sistema sistema, WindowManager windowManager, User user) {
 		this.sistema = sistema;
+		this.windowManager = windowManager;
 		this.user = user;
 		
 		frame = new JFrame("Ventas Coquimbo");
@@ -118,8 +121,10 @@ public class PerfilWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				@SuppressWarnings("unused")
-				SellWindow sellWindow = new SellWindow(sistema, user);
+				/*@SuppressWarnings("unused")
+				SellWindow sellWindow = new SellWindow(sistema, user);*/
+				
+				windowManager.changeWindow("sell");
 			}
 		});
 		
@@ -127,12 +132,22 @@ public class PerfilWindow {
 		infoBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
 				
-				Product selectedProduct = sistema.getProductById(Integer.parseInt((String)data[table.getSelectedRow()][0]));
+				if(table.getSelectedRow() !=-1) {
+					frame.dispose();
+
+					Product selectedProduct = sistema.getProductById(Integer.parseInt((String)data[table.getSelectedRow()][0]));
+					
+					/*@SuppressWarnings("unused")
+					ProductInfoWindow productInfoWindow = new ProductInfoWindow(sistema, selectedProduct);*/
+					
+					windowManager.setProduct(selectedProduct);
+					windowManager.changeWindow("info");
+				}else {
+					System.out.println("No se ha seleccionado ningún producto");
+				}
 				
-				@SuppressWarnings("unused")
-				ProductInfoWindow productInfoWindow = new ProductInfoWindow(sistema, selectedProduct);
+				
 			}
 		});
 		

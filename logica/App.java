@@ -11,7 +11,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import utils.LoginWindow;
+import utils.MyProductsWindow;
 import utils.SellWindow;
+import utils.WindowManager;
 
 public class App {
 	
@@ -19,8 +21,12 @@ public class App {
 	
     public static void main(String[] args) {
     	Sistema sistema = new SistemaImpl();
+    	WindowManager windowManager = new WindowManager(sistema);
+    	
+		//LoginWindow login = new LoginWindow(sistema);
+		
+    	
 
-		LoginWindow login = new LoginWindow(sistema);
     	//SellWindow sellWindow = new SellWindow(sistema);
 	}
 

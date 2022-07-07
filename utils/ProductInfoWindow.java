@@ -18,17 +18,22 @@ import javax.swing.SwingConstants;
 public class ProductInfoWindow {
 	
 	Sistema sistema;
+	WindowManager windowManager;
+	
 	Product product;
 	
 	JFrame frame;
 	
-	public ProductInfoWindow(Sistema sistema,Product product) {
+	public ProductInfoWindow(Sistema sistema, WindowManager windowManager, Product product) {
 		this.sistema = sistema;
+		this.windowManager = windowManager;
+		
 		this.product = product;
+		this.product.setSeen(true);
 		
 		//Setup window
 		frame = new JFrame("Ventas Coquimbo - ");
-		frame.setSize(557, 345);
+		frame.setSize(557, 357);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -106,5 +111,23 @@ public class ProductInfoWindow {
 		});
 				
 		panel.add(buyBtn);
+		
+		// Botón: Volver
+		JButton backBtn = new JButton("Volver");
+		backBtn.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+		backBtn.setBounds(347, 282, 160, 25);
+		
+		backBtn.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				
+				windowManager.changeWindow("back");
+			}
+		});
+		
+		panel.add(backBtn);
+		
+		
 	}
 }
