@@ -1,9 +1,15 @@
 package logica;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import dominio.Product;
 import dominio.User;
@@ -16,13 +22,29 @@ public class SistemaImpl implements Sistema {
 
     int idCounter;
     
-    public SistemaImpl(){
+    public SistemaImpl() throws FileNotFoundException{
         users = new ArrayList<>();
         products = new ArrayList<>();
         
+        readUserRegistry(users);
         idCounter = 1;
     }
-
+    
+	@Override
+	public void readUserRegistry(ArrayList<User> users) throws FileNotFoundException {
+		Scanner scan = new Scanner(new File("Users.txt"));
+		while(scan.hasNextLine()) {
+			String [] s = scan.nextLine().split(",");
+			String userName = s[0];
+			String fullName = s[1];
+			String mail = s[2];
+			String contact = s[3];
+			String password = s[4];
+			User u = new User(userName,fullName,mail,contact,password);
+			users.add(u);
+		}
+	}
+	
 	@Override
 	public boolean login(String user, String pasword) {
 		for(User u : users) {
@@ -30,6 +52,7 @@ public class SistemaImpl implements Sistema {
 				return true;
 			}
 		}
+		JOptionPane.showMessageDialog(null, "Usuario no encontrado! Por favor, intentelo de nuevo.");
 		return false;
 	}
 
@@ -124,4 +147,19 @@ public class SistemaImpl implements Sistema {
 		return scaledImage;
 	}
 
+	@Override
+	public void saveChanges(ArrayList<User> users) throws IOException {
+		FileWriter escribirTxt = new FileWriter("Users.txt");
+		int cont = 0;
+		for (User user : users) {
+			String linea = user.getUsername()+","+user.getName()+","+user.getEmail()+","+user.getContact()+","+user.getPassword();
+			
+			if(cont!=0) {
+				escribirTxt.write("\n");
+			}
+			escribirTxt.write(linea);
+			cont++;
+		}
+		escribirTxt.close();
+	}
 }

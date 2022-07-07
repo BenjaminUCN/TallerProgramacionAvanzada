@@ -1,6 +1,7 @@
 package logica;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -17,7 +18,7 @@ public class App {
 	
 	public static Sistema sistema;
 	
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
     	Sistema sistema = new SistemaImpl();
 
 		LoginWindow login = new LoginWindow(sistema);
