@@ -1,5 +1,6 @@
 package dominio;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User{
     private String username;
@@ -9,7 +10,9 @@ public class User{
     private String password;
     
     //lista de productos publicados
+    private List<Product> posts;
     //lista de productos comprados
+    private List<Product> compras;
     
 	public User(String username, String name, String email, String contact, String password) {
 		super();
@@ -18,6 +21,27 @@ public class User{
 		this.email = email;
 		this.contact = contact;
 		this.password = password;
+		posts = new ArrayList<Product>();
+	}
+	
+	public void addPost(Product p) {
+		posts.add(p);
+	}
+	
+	public List<Product> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(List<Product> compras) {
+		this.compras = compras;
+	}
+
+	public List<Product> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Product> posts) {
+		this.posts = posts;
 	}
 
 	public String getUsername() {

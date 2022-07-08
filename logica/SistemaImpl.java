@@ -94,6 +94,8 @@ public class SistemaImpl implements Sistema {
 		
 		Product newProduct = new Product(idCounter, name, category, price, description, imagePath, sellerUser);
 		products.add(newProduct);
+		sellerUser.addPost(newProduct);
+		System.out.println(sellerUser.getPosts().get(0).getName());
 		
 		idCounter++;
 	}
@@ -119,6 +121,26 @@ public class SistemaImpl implements Sistema {
 		
 		return data;
 	}
+	
+	public Object[][] getUserPosts(User user) {
+		//Lista con productos filtrados
+		ArrayList<Object[]> post = new ArrayList<>();
+		
+		for(Product p : products) {
+			post.add(p.getData());
+		}
+		
+		Object[][] data;
+		data = new Object[post.size()][5];
+		
+		
+		for(int i=0;i<data.length;i++) {
+			data[i] = post.get(i);
+		}
+		
+		return data;
+	}
+		
 	
 	/**
 	 * escala la imagen, solo funciona con labels cuadrados por ahora

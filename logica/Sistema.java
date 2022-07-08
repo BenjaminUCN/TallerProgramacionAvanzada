@@ -19,7 +19,7 @@ public interface Sistema {
 	public Product getProductById(int id);
 	public void addProductToShop(String name, String category, int price, String description, String imagePath, User sellerUser);
 	public Object[][] getProductData(String filter);
-	
+	public Object[][] getUserPosts(User user);
 	/**
 	 * escala la imagen, solo funciona con labels cuadrados por ahora
 	 * @param path directorio de la imagen 
