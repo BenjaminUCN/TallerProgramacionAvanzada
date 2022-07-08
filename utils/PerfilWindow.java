@@ -135,7 +135,16 @@ public class PerfilWindow {
 				ProductInfoWindow productInfoWindow = new ProductInfoWindow(sistema, selectedProduct);
 			}
 		});
-		
+		//Ver publicaciones
+		myPostsBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				
+				MyPostsWindow myPostsWindow = new MyPostsWindow(sistema,user);
+				
+			}
+		});
 		category.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
