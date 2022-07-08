@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import logica.Sistema;
@@ -56,7 +57,7 @@ public class LoginWindow {
 		panel.add(passwordLabel);
 				
 		// entrada de texto: Contraseña
-		JTextField passwordTextField = new JTextField(20);
+		JPasswordField passwordTextField = new JPasswordField(20);
 		passwordTextField.setBounds(115,93,160,25);
 		panel.add(passwordTextField);
 				

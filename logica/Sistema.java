@@ -1,12 +1,18 @@
 package logica;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 
 import dominio.Product;
 import dominio.User;
 
 public interface Sistema {
-
+	
+	public void readUserRegistry(ArrayList<User> users) throws FileNotFoundException;
+	//lectura de archivo
 	public boolean login(String user, String pasword);
 	public boolean sigin(String username, String name, String email, String contact, String password);
 	public User getUserByName(String username);
@@ -22,4 +28,7 @@ public interface Sistema {
 	 * @return imagen (ImageIcon) escalada para el label
 	 */
 	public ImageIcon scaleImage(String path, int width, int height);
+	
+	public void saveChanges(ArrayList<User> users) throws IOException;
+	//guarda los cambios al txt
 }

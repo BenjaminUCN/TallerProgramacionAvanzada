@@ -54,7 +54,7 @@ public class PerfilWindow {
 	    panel.setLayout(null);
 	
 		// texto: Bienvenido
-		JLabel userLabel = new JLabel("Bienvenido "+user.getUsername());
+		JLabel userLabel = new JLabel("Bienvenido "+user.getUsername()+"!");
 		userLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		userLabel.setBounds(26, 10, 130, 25);
 		panel.add(userLabel);
