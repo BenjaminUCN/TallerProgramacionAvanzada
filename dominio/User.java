@@ -9,6 +9,8 @@ public class User{
     private String contact;
     private String password;
     
+    private int ventas;
+    
     //lista de productos publicados
     private List<Product> posts;
     //lista de productos comprados
@@ -21,6 +23,8 @@ public class User{
 		this.email = email;
 		this.contact = contact;
 		this.password = password;
+		
+		this.ventas = 0;
 		posts = new ArrayList<Product>();
 		compras = new ArrayList<Product>();
 	}
@@ -32,6 +36,15 @@ public class User{
 	public void addCompra(Product p) {
 		compras.add(p);
 		
+	}
+	
+	public void addVenta(Product p) {
+		p.setSold(true);
+		ventas++;
+	}
+	
+	public int getVentas() {
+		return ventas;
 	}
 	
 	public List<Product> getCompras() {
@@ -107,7 +120,11 @@ public class User{
 		
 		return data;
 	}
-
+	
+	public int getPostCount() {
+		return posts.size();
+	}
+	
     public int getPurchaseCount() {
     	return compras.size();
     }

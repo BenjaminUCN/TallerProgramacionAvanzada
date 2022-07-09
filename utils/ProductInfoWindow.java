@@ -109,6 +109,7 @@ public class ProductInfoWindow {
 				Product p = windowManager.getProduct();
 				
 				windowManager.getUser().addCompra(p);
+				p.getSellerUser().addVenta(p);
 			}
 		});
 				

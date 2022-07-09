@@ -31,7 +31,7 @@ public class MyPostsWindow {
 		this.user = user;
 		
 		frame = new JFrame("Ventas Coquimbo - ");
-		frame.setSize(600, 400);
+		frame.setSize(600, 450);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -55,6 +55,11 @@ public class MyPostsWindow {
 		postLabel.setBounds(200, 55, 130, 25);
 		panel.add(postLabel);
 		
+		JLabel sellsCountLabel = new JLabel("Cantidad de ventas: "+windowManager.getUser().getVentas());
+		sellsCountLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		sellsCountLabel.setBounds(200, 370, 130, 25);
+		panel.add(sellsCountLabel);
+		
 		String[] columnNames = new String[] {"ID", "Nombre", "Categoria", "Fecha", "Vendidas S_N"};											
 		data = sistema.getUserPosts(user);		
 		
@@ -65,7 +70,7 @@ public class MyPostsWindow {
 		table.getColumnModel().getColumn(1).setPreferredWidth(100);
 		table.getColumnModel().getColumn(2).setPreferredWidth(100);
 		table.getColumnModel().getColumn(3).setPreferredWidth(100);
-		table.getColumnModel().getColumn(4).setPreferredWidth(30);
+		table.getColumnModel().getColumn(4).setPreferredWidth(100);
 		table.setShowHorizontalLines(false);
 		table.setShowVerticalLines(false);
 		table.setPreferredScrollableViewportSize(new Dimension(200,30));
@@ -73,7 +78,7 @@ public class MyPostsWindow {
 								
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-		scrollPane.setBounds(25, 80, 493, 200);
+		scrollPane.setBounds(25, 80, 510, 200);
 		panel.add(scrollPane);
 		
 		JButton editBtn = new JButton("Editar producto");

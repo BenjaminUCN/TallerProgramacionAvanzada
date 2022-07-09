@@ -98,6 +98,14 @@ public class Product {
 		}
 	}
 	
+	public void setSold(boolean sold) {
+		if(sold) {
+			this.sold = "Sí";
+		}else {
+			this.sold = "No";
+		}
+	}
+	
 	public String[] getData(String type) {
 		if(type.equals("forUser")) {
 			String[] data = {String.valueOf(id), name, category, date, sold};

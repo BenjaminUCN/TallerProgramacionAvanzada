@@ -65,7 +65,6 @@ public class WindowManager {
 	
 	public void setUser(User user) {
 		this.user = user;
-		System.out.println("nombre:"+user.getName());
 	}
 	
 	public void setProduct(Product product) {
