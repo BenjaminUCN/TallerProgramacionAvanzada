@@ -160,6 +160,17 @@ public class PerfilWindow {
 				
 			}
 		});
+		
+		myShopsBtn.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				
+				windowManager.changeWindow("myPurchases");
+				
+			}
+		});
+		
 		category.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

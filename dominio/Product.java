@@ -103,6 +103,10 @@ public class Product {
 			String[] data = {String.valueOf(id), name, category, date, sold};
 			return data;
 		}
+		if(type.equals("forConsumer")) {
+			String[] data = {String.valueOf(id), sellerUser.getUsername(), name, String.valueOf(price)};
+			return data;
+		}
 		String[] data = {String.valueOf(id), name, category, date, seen};
 		return data;
 	}

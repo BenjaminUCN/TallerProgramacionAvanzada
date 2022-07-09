@@ -101,6 +101,36 @@ public class MyPostsWindow {
 			}
 		});
 		
+		eraseBtn.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow() !=-1) {
+					Product selectedProduct = sistema.getProductById(Integer.parseInt((String)data[table.getSelectedRow()][0]));
+					
+					sistema.deleteProduct(selectedProduct);
+					
+					data = sistema.getUserPosts(user);
+					
+					//Borrar la tabla
+					for(int i=0; i<table.getRowCount();i++) {
+						for(int j=0;j<5;j++) {
+							table.setValueAt("", i, j);
+						}
+					}
+					
+					//Escribir los datos
+					System.out.println(data.length);
+					for(int i=0; i<data.length;i++) {
+						for(int j=0;j<5;j++) {
+							table.setValueAt(data[i][j], i, j);
+						}	
+					}
+				}
+				
+				
+			}
+		});
+		
 		// Botón: Volver
 		JButton backBtn = new JButton("Volver");
 		backBtn.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));

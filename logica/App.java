@@ -12,7 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import utils.LoginWindow;
-import utils.MyProductsWindow;
+import utils.MyPurchasesWindow;
 import utils.SellWindow;
 import utils.WindowManager;
 

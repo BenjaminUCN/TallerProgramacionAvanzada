@@ -54,6 +54,9 @@ public class WindowManager {
 			case "myPosts":
 				currentWindow = new MyPostsWindow(sistema, this, user);
 				break;
+			case "myPurchases":
+				currentWindow = new MyPurchasesWindow(sistema, this);
+				break;
 			default:
 				break;
 		}
@@ -62,10 +65,15 @@ public class WindowManager {
 	
 	public void setUser(User user) {
 		this.user = user;
+		System.out.println("nombre:"+user.getName());
 	}
 	
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+	
+	public User getUser() {
+		return this.user;
 	}
 	
 	public Product getProduct() {

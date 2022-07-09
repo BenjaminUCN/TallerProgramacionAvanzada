@@ -22,10 +22,16 @@ public class User{
 		this.contact = contact;
 		this.password = password;
 		posts = new ArrayList<Product>();
+		compras = new ArrayList<Product>();
 	}
 	
 	public void addPost(Product p) {
 		posts.add(p);
+	}
+	
+	public void addCompra(Product p) {
+		compras.add(p);
+		
 	}
 	
 	public List<Product> getCompras() {
@@ -84,8 +90,26 @@ public class User{
 		this.password = password;
 	}
 
-    
+	public Object[][] getUserPurchases() {
+		ArrayList<Object[]> post = new ArrayList<>();
+		
+		for(Product p : compras) {
+			post.add(p.getData("forConsumer"));
+		}
+		
+		Object[][] data;
+		data = new Object[post.size()][5];
+		
+		
+		for(int i=0;i<data.length;i++) {
+			data[i] = post.get(i);
+		}
+		
+		return data;
+	}
 
-    
+    public int getPurchaseCount() {
+    	return compras.size();
+    }
 
 }

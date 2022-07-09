@@ -36,7 +36,7 @@ public class SistemaImpl implements Sistema {
 		Scanner scan = new Scanner(new File("Users.txt"));
 		while(scan.hasNextLine()) {
 			String [] s = scan.nextLine().split(",");
-			if(s.length>0) {
+			if(s.length>4) {
 				String userName = s[0];
 				String fullName = s[1];
 				String mail = s[2];
@@ -137,7 +137,24 @@ public class SistemaImpl implements Sistema {
 	}
 	
 	public Object[][] getUserPosts(User user) {
-		//Lista con productos filtrados
+		ArrayList<Object[]> post = new ArrayList<>();
+		
+		for(Product p : products) {
+			post.add(p.getData("forUser"));
+		}
+		
+		Object[][] data;
+		data = new Object[post.size()][5];
+		
+		
+		for(int i=0;i<data.length;i++) {
+			data[i] = post.get(i);
+		}
+		
+		return data;
+	}
+	
+	public Object[][] getUserPurchases(User user) {
 		ArrayList<Object[]> post = new ArrayList<>();
 		
 		for(Product p : products) {
@@ -208,7 +225,6 @@ public class SistemaImpl implements Sistema {
 
 	@Override
 	public void deleteProduct(Product product) {
-		// TODO Auto-generated method stub
-		
+		products.remove(product);
 	}
 }

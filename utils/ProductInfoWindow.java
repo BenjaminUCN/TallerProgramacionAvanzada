@@ -106,7 +106,9 @@ public class ProductInfoWindow {
 		buyBtn.addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Product p = windowManager.getProduct();
 				
+				windowManager.getUser().addCompra(p);
 			}
 		});
 				
@@ -122,6 +124,7 @@ public class ProductInfoWindow {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				
+				windowManager.setProduct(null);
 				windowManager.changeWindow("back");
 			}
 		});
