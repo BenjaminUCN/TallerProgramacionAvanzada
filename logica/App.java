@@ -16,6 +16,13 @@ import utils.MyPurchasesWindow;
 import utils.SellWindow;
 import utils.WindowManager;
 
+/*Intregantes:
+ * Ethan Astorga
+ * Mauricio Díaz
+ * Benjamín Donoso 
+ * */
+
+
 public class App {
 	
 	public static Sistema sistema;
