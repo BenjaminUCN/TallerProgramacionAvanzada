@@ -61,7 +61,7 @@ public class MyPostsWindow {
 		panel.add(sellsCountLabel);
 		
 		String[] columnNames = new String[] {"ID", "Nombre", "Categoria", "Fecha", "Vendidas S_N"};											
-		data = sistema.getUserPosts(user);		
+		data = user.getUserPosts();		
 		
 		JTable table = new JTable(data, columnNames);
 		table.getTableHeader().setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -114,7 +114,7 @@ public class MyPostsWindow {
 					
 					sistema.deleteProduct(selectedProduct);
 					
-					data = sistema.getUserPosts(user);
+					data = user.getUserPosts();
 					
 					//Borrar la tabla
 					for(int i=0; i<table.getRowCount();i++) {

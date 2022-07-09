@@ -9,7 +9,7 @@ public class User{
     private String contact;
     private String password;
     
-    private int ventas;
+    private int cantidadVentas;
     
     //lista de productos publicados
     private List<Product> posts;
@@ -24,7 +24,7 @@ public class User{
 		this.contact = contact;
 		this.password = password;
 		
-		this.ventas = 0;
+		this.cantidadVentas = 0;
 		posts = new ArrayList<Product>();
 		compras = new ArrayList<Product>();
 	}
@@ -40,11 +40,11 @@ public class User{
 	
 	public void addVenta(Product p) {
 		p.setSold(true);
-		ventas++;
+		cantidadVentas++;
 	}
 	
 	public int getVentas() {
-		return ventas;
+		return cantidadVentas;
 	}
 	
 	public List<Product> getCompras() {
@@ -72,7 +72,9 @@ public class User{
 	}
 
 	public String getName() {
+		System.out.println(name);
 		return name;
+		
 	}
 
 	public void setName(String name) {
@@ -80,10 +82,12 @@ public class User{
 	}
 
 	public String getEmail() {
+		System.out.println("email: "+email);
 		return email;
 	}
 
 	public void setEmail(String email) {
+		System.out.println("email: cambió");
 		this.email = email;
 	}
 
@@ -102,7 +106,25 @@ public class User{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	public Object[][] getUserPosts() {
+		ArrayList<Object[]> post = new ArrayList<>();
+		
+		for(Product p : posts) {
+			post.add(p.getData("forUser"));
+		}
+		
+		Object[][] data;
+		data = new Object[post.size()][5];
+		
+		
+		for(int i=0;i<data.length;i++) {
+			data[i] = post.get(i);
+		}
+		
+		return data;
+	}
+	
 	public Object[][] getUserPurchases() {
 		ArrayList<Object[]> post = new ArrayList<>();
 		

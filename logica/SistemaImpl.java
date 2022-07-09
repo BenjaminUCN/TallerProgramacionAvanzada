@@ -136,23 +136,7 @@ public class SistemaImpl implements Sistema {
 		return data;
 	}
 	
-	public Object[][] getUserPosts(User user) {
-		ArrayList<Object[]> post = new ArrayList<>();
-		
-		for(Product p : products) {
-			post.add(p.getData("forUser"));
-		}
-		
-		Object[][] data;
-		data = new Object[post.size()][5];
-		
-		
-		for(int i=0;i<data.length;i++) {
-			data[i] = post.get(i);
-		}
-		
-		return data;
-	}
+	
 	
 	public Object[][] getUserPurchases(User user) {
 		ArrayList<Object[]> post = new ArrayList<>();
