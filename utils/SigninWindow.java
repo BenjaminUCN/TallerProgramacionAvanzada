@@ -1,6 +1,8 @@
 package utils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -50,12 +52,20 @@ public class SigninWindow extends Window {
 			    	   String contact = contactText.getText();
 			    	   String password = firstPasswordText.getText();
 			    	   
-			    	   if(sistema.sigin(username, name, email, contact, password))
-			    	   frame.dispose();
+			    	   try {
+						if(sistema.sigin(username, name, email, contact, password)) {
+							   frame.dispose();
+							   windowManager.changeWindow("login");
+						   }
+			    	   } catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+			    	   }
+			    	   
 					   /*@SuppressWarnings("unused")
 					   LoginWindow loginWindow = new LoginWindow(sistema);*/
 			    	   
-			    	   windowManager.changeWindow("login");
+			    	  
 		    	   }
 		    	           	
 		       }

@@ -2,6 +2,8 @@ package utils;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,13 +19,15 @@ import logica.Sistema;
 public class MyPostsWindow {
 
 	Sistema sistema;
+	WindowManager windowManager;
 	User user;
 	
 	JFrame frame;
 	Object[][] data;
 	
-	public MyPostsWindow(Sistema sistema, User user) {
+	public MyPostsWindow(Sistema sistema,WindowManager windowManager, User user) {
 		this.sistema = sistema;
+		this.windowManager = windowManager;
 		this.user = user;
 		
 		frame = new JFrame("Ventas Coquimbo - ");
@@ -79,6 +83,38 @@ public class MyPostsWindow {
 		
 		editBtn.setBounds(26, 327, 160, 25);
 		eraseBtn.setBounds(400, 327, 130, 25);
+		
+		editBtn.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow() !=-1) {
+					frame.dispose();
+
+					Product selectedProduct = sistema.getProductById(Integer.parseInt((String)data[table.getSelectedRow()][0]));
+
+					
+					windowManager.setProduct(selectedProduct);
+					windowManager.changeWindow("sell");
+				}else {
+					System.out.println("No se ha seleccionado ningún producto");
+				}
+			}
+		});
+		
+		// Botón: Volver
+		JButton backBtn = new JButton("Volver");
+		backBtn.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+		backBtn.setBounds(200, 327, 160, 25);
+				
+		backBtn.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+						
+				windowManager.changeWindow("perfil");
+			}
+		});
+		panel.add(backBtn);
 		
 		panel.add(editBtn);
 		panel.add(eraseBtn);

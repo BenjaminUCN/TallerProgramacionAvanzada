@@ -156,7 +156,7 @@ public class PerfilWindow {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				
-				MyPostsWindow myPostsWindow = new MyPostsWindow(sistema,user);
+				windowManager.changeWindow("myPosts");
 				
 			}
 		});

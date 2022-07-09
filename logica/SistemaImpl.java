@@ -36,13 +36,16 @@ public class SistemaImpl implements Sistema {
 		Scanner scan = new Scanner(new File("Users.txt"));
 		while(scan.hasNextLine()) {
 			String [] s = scan.nextLine().split(",");
-			String userName = s[0];
-			String fullName = s[1];
-			String mail = s[2];
-			String contact = s[3];
-			String password = s[4];
-			User u = new User(userName,fullName,mail,contact,password);
-			users.add(u);
+			if(s.length>0) {
+				String userName = s[0];
+				String fullName = s[1];
+				String mail = s[2];
+				String contact = s[3];
+				String password = s[4];
+				User u = new User(userName,fullName,mail,contact,password);
+				users.add(u);
+			}
+			
 		}
 	}
 	
@@ -58,11 +61,12 @@ public class SistemaImpl implements Sistema {
 	}
 
 	@Override
-	public boolean sigin(String username, String name, String email, String contact, String password) {
+	public boolean sigin(String username, String name, String email, String contact, String password) throws IOException {
 		// si no está registrado
 		if(true) {
 			User newUser = new User(username, name, email, contact, password);
 			users.add(newUser);
+			saveChanges(users);
 			return true;
 		}
 		return false;
@@ -89,6 +93,16 @@ public class SistemaImpl implements Sistema {
 	}
 	
 	@Override
+	public Product getProductByName(String name) {
+		for(Product p : products) {
+			if(p.getName().equals(name)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	@Override
 	public void addProductToShop(String name, String category, int price, String description, String imagePath,
 			User sellerUser) {
 		
@@ -107,7 +121,7 @@ public class SistemaImpl implements Sistema {
 		
 		for(Product p : products) {
 			if(p.getCategory().equals(filter) || filter.equals("Todo")) {
-				filteredProducts.add(p.getData());
+				filteredProducts.add(p.getData(""));
 			}
 		}
 		
@@ -127,7 +141,7 @@ public class SistemaImpl implements Sistema {
 		ArrayList<Object[]> post = new ArrayList<>();
 		
 		for(Product p : products) {
-			post.add(p.getData());
+			post.add(p.getData("forUser"));
 		}
 		
 		Object[][] data;
@@ -184,5 +198,17 @@ public class SistemaImpl implements Sistema {
 			cont++;
 		}
 		escribirTxt.close();
+	}
+
+	@Override
+	public void editProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteProduct(Product product) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -14,10 +14,13 @@ public interface Sistema {
 	public void readUserRegistry(ArrayList<User> users) throws FileNotFoundException;
 	//lectura de archivo
 	public boolean login(String user, String pasword);
-	public boolean sigin(String username, String name, String email, String contact, String password);
+	public boolean sigin(String username, String name, String email, String contact, String password) throws IOException;
 	public User getUserByName(String username);
 	public Product getProductById(int id);
+	public Product getProductByName(String name);
 	public void addProductToShop(String name, String category, int price, String description, String imagePath, User sellerUser);
+	public void editProduct(Product product);
+	public void deleteProduct(Product product);
 	public Object[][] getProductData(String filter);
 	public Object[][] getUserPosts(User user);
 	/**
@@ -31,4 +34,5 @@ public interface Sistema {
 	
 	public void saveChanges(ArrayList<User> users) throws IOException;
 	//guarda los cambios al txt
+	
 }

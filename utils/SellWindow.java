@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dominio.Product;
 import dominio.User;
 import logica.Sistema;
 import javax.swing.JTextPane;
@@ -28,6 +29,7 @@ public class SellWindow{
 	
 	User sellerUser;
 	String imagePath;
+	int id;
 	
 	JFrame frame;
 	
@@ -140,7 +142,18 @@ public class SellWindow{
 				//String description = descriptionTextField.getText();
 				String description = descriptionTxtpn.getText();
 				
-				sistema.addProductToShop(name, categoryStr, price, description, imagePath, sellerUser);
+				//si esta en el sistema
+				if(sistema.getProductById(id)!=null) {
+					Product p = sistema.getProductById(id); 
+					//sistema.actualizar(datos);
+					p.setName(name);
+					p.setCategory(categoryStr);
+					p.setPrice(price);
+					p.setDescription(description);
+					p.setImagePath(imagePath);
+				}else {
+					sistema.addProductToShop(name, categoryStr, price, description, imagePath, sellerUser);
+				}
 				
 				frame.dispose();
 	        	/*@SuppressWarnings("unused")
@@ -184,6 +197,19 @@ public class SellWindow{
 		
 		panel.add(uploadPhotoBtn);
 		
+		//Obtener datos del producto a editar
+		if(windowManager.getProduct()!=null) {
+			Product p = windowManager.getProduct();
+			
+			id = p.getId();
+			
+			productNameTextField.setText(p.getName());
+			productPriceTextField.setText(String.valueOf(p.getPrice()));
+			descriptionTxtpn.setText(p.getDescription());
+			imagePath = p.getImagePath();
+			photoLabel.setIcon(sistema.scaleImage(imagePath, photoLabel.getWidth(), photoLabel.getHeight()));
+			category.setSelectedItem(p.getCategory());
+		}
 		
 	}
 }

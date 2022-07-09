@@ -12,6 +12,7 @@ public class Product {
 	private String date;
 	
 	private String seen;
+	private String sold;
 	
 	//Usuario
 	private User sellerUser;
@@ -25,6 +26,7 @@ public class Product {
 		this.description = description;
 		this.imagePath = imagePath;
 		this.seen = "No";
+		this.sold = "No";
 		this.sellerUser = sellerUser;
 		
 		Date currentDate = new Date();
@@ -96,7 +98,11 @@ public class Product {
 		}
 	}
 	
-	public String[] getData() {
+	public String[] getData(String type) {
+		if(type.equals("forUser")) {
+			String[] data = {String.valueOf(id), name, category, date, sold};
+			return data;
+		}
 		String[] data = {String.valueOf(id), name, category, date, seen};
 		return data;
 	}

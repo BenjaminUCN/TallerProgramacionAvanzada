@@ -51,6 +51,9 @@ public class WindowManager {
 			case "info":
 				currentWindow = new ProductInfoWindow(sistema, this, product);
 				break;
+			case "myPosts":
+				currentWindow = new MyPostsWindow(sistema, this, user);
+				break;
 			default:
 				break;
 		}
@@ -63,5 +66,9 @@ public class WindowManager {
 	
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+	
+	public Product getProduct() {
+		return this.product;
 	}
 }
